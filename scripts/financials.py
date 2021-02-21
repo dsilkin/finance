@@ -1,0 +1,14 @@
+import requests, sys
+
+defaultKeyStatistics = requests.get('https://query2.finance.yahoo.com/v10/finance/quoteSummary/'+sys.argv[1]+'?formatted=true&crumb=8ldhetOu7RJ&lang=en-US&region=US&modules=defaultKeyStatistics%2CfinancialData%2CcalendarEvents&corsDomain=finance.yahoo.com')
+summaryDetail = requests.get('https://query2.finance.yahoo.com/v10/finance/quoteSummary/'+sys.argv[1]+'?formatted=true&crumb=8ldhetOu7RJ&lang=en-US&region=US&modules=summaryDetail&corsDomain=finance.yahoo.com')
+defaultKeyStatistics = defaultKeyStatistics.json()
+summaryDetail = summaryDetail.json()
+
+print("totalCash " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['totalCash']['raw']))
+print("totalDebt " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['totalDebt']['raw']))
+print("freeCashflow " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['freeCashflow']['raw']))
+print("ebitda " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['ebitda']['raw']))
+print("grossMargins " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['grossMargins']['raw']))
+print("marketCap " + str(summaryDetail['quoteSummary']['result'][0]['summaryDetail']['marketCap']['raw']))
+
