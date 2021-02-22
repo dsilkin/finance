@@ -14,19 +14,20 @@ def roundTime(dt=None, roundTo=60):
    rounding = (seconds+roundTo/2) // roundTo * roundTo
    return dt + timedelta(0,rounding-seconds,-dt.microsecond)
 
-cd2 = roundTime() - timedelta(hours=52)
-cd1 = cd2 - timedelta(minutes=10)
+cd2 = roundTime() - timedelta(hours=56)
+cd1 = cd2 - timedelta(minutes=60)
 data = yf.download(tickers=sys.argv[1], start=cd1,end=cd2, interval="1m",progress=False)
 js = json.loads(str(data.to_json()).replace("'","\""))
 summ_buy = 0
 summ_sale = 0
-#print(js["Volume"])
+#print(js)
 for i in range(0, len(js["Close"].values())):
     if (list(js["Close"].values())[i]) > (list(js["Open"].values())[i]):
         summ_buy = summ_buy + list(js["Volume"].values())[i]
     else:
         summ_sale = summ_sale + list(js["Volume"].values())[i]
 
+last_close = list(js["Close"].values())[len(js["Close"].values())-1]
 URL = 'https://finance.yahoo.com/quote/'+sys.argv[1]+'?p='+sys.argv[1]+'&.tsrc=fin-srch'
 res = requests.get(URL)
 res.raise_for_status()
@@ -40,4 +41,4 @@ for quote in quotes:
 print("bay " + str(summ_buy))
 print("sale " + str(summ_sale))
 print("news_counter " + str(count))
-
+print("last_close " + str(last_close))
