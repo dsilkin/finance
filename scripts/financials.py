@@ -13,6 +13,6 @@ print("freeCashflow " + str(defaultKeyStatistics['quoteSummary']['result'][0]['f
 print("ebitda " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['ebitda']['raw']))
 print("grossMargins " + str(defaultKeyStatistics['quoteSummary']['result'][0]['financialData']['grossMargins']['raw']))
 print("marketCap " + str(summaryDetail['quoteSummary']['result'][0]['summaryDetail']['marketCap']['raw']))
-print("industry " + str(profile['quoteSummary']['result'][0]['assetProfile']['industry']))
+#print("industry " + str(profile['quoteSummary']['result'][0]['assetProfile']['industry']))
 print("fullTimeEmployees " + str(profile['quoteSummary']['result'][0]['assetProfile']['fullTimeEmployees']))
 
